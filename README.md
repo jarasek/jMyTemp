@@ -51,5 +51,15 @@ This command put current value of specified variable to attribute of this tag. I
 ```
 ###Tag content from over template
 
-####Include command
+####Include template
+
+```
+include template
+```
+This command put content of external file to innerHTML of this tag. File is loaded if innerHTML is empty. This means that file is loaded only ones. For example:
+
+```
+<div data-temp="if page.type main; include /app/templates/main.html"></div>
+```
+If "page.type" variable is "main" template is inserted. After that variable can change, because user can make some action. Content of this tag is never removed, but only it is hidden. Back to the "main" page change visibility of this tag, but content is not loaded again.
 
