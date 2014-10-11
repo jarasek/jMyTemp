@@ -77,6 +77,22 @@ Command insert content of this tag from external file. File is loaded even inner
 ```
 Variable "page.file" can contain /app/book/chapter_1.html. Tag content can change each time when user switch between chapters.
 
+####1.5 Loop
+
+```
+loop variable iter_name
+```
+Example:
+
+```
+<div data-temp="loop page.chapters i">
+  chapter:<span data-temp="val .i.title"></span><br>
+  <div data-temp="loop .i.autors k">
+    autor:<span data-temp="val .k"></span><br>
+  </div>
+</div>
+```
+
 ####1.6 Data manipulation
 
 ```
