@@ -29,7 +29,7 @@ Result of first is TRUE only when "variable" is equal  to "value". Result of "if
 
 If result is FALSE next commands in this data-temp are not interpreted!
 
-###Variable value
+###Tag content from variable
 
 ```
 val variable
@@ -49,3 +49,7 @@ This command put current value of specified variable to attribute of this tag. I
 ```
 <span data-temp="attr page.color style"></span>
 ```
+###Tag content from over template
+
+####Include command
+
