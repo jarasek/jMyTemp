@@ -49,7 +49,7 @@ This command put current value of specified variable to attribute of this tag. I
 ```
 <span data-temp="attr page.color style"></span>
 ```
-###1.4 Tag content from over template
+###1.4 Tag content from template file
 
 ####1.4.1 Include template
 
@@ -108,6 +108,7 @@ autor:x
 autor:y
 autor:z
 ```
+This command loops by array variables. It is possible to use only simple arrays (not associative). If array is empty content of tag is not rendered. Second parameter of command is name of temporary variable used in loop. Name of this variable can be used inside the loop, but must be preceded by dot. After rendering tag with loop command content of this tag is moved inside created special DIV tag with style="display: none;" and  class="loop-cache". Next rendering process remove previously rendered content and regenerate it from this DIV. Cache DIV is created only for main loop.
 
 ####1.6 Data manipulation
 
