@@ -77,7 +77,7 @@ Command insert content of this tag from external file. File is loaded even inner
 ```
 Variable "page.file" can contain /app/book/chapter_1.html. Tag content can change each time when user switch between chapters.
 
-####1.5 Loop
+###1.5 Loop
 
 ```
 loop variable item_name
@@ -110,9 +110,51 @@ autor:z
 ```
 This command loops by array variables. It is possible to use only simple arrays (not associative). If array is empty, content of tag is not rendered. Second parameter of command is name of temporary variable used in loop. Name of this variable can be used inside the loop, but must be preceded by dot. After rendering tag with loop command, content of this tag is moved inside created special DIV tag with style="display: none;" and  class="loop-cache". Next rendering process remove previously rendered content and regenerate it from this DIV. Cache DIV is created only for main loop.
 
-####1.6 Data manipulation
+###1.6 Data manipulation
 
 ```
 data url
 ```
 This command gets additional data from specified url and merge it with data used to render this template. 
+
+##2. Using template engine in your code
+
+###2.1 Server side
+
+Include jMyTemp.php:
+
+```
+require_once 'jmytemp.php';
+```
+Create template class and load rendered file:
+
+```
+$temp = new Template();
+$temp->loadFile("main.html");
+```
+Prepare $data for rendering and render it:
+```
+$temp->render($data, "tag-id");
+```
+Second parameter is value of id attribute of rendered tag. If second parameter is omitted, file is rendered from beginning. $data used for render can be transfered inside created HTML file. In HEAD of this HTML is created SCRIPT tag with data in js format. You can use it in your js code:
+```
+$data = array("page" => "main");
+$temp->saveData($data);
+
+<html>
+  <head>
+    ...
+    <script type="text/javascript">
+      var data = {page: "main"};
+    </script>
+    ...
+  <head>
+  ...
+</html>
+```
+Output renderd code:
+```
+echo $temp->getHtml();
+```
+
+
