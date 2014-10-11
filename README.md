@@ -39,12 +39,12 @@ This command put current value of specified variable to innerHTML of this tag. F
 ```
 <span data-temp="val page.creation.date"></span>
 ```
-###Change tag attribute
+###Tag attribute from variable
 
 ```
 attr variable attribute
 ```
-This command put current value of specified variable to attribute of this tag. If attribute of specified name not exist then is created, otherwise its value is changed  For example:
+This command put current value of specified variable to attribute of this tag. If attribute of specified name not exist then is created, otherwise its value is changed. For example:
 
 ```
 <span data-temp="attr page.color style"></span>
