@@ -85,12 +85,28 @@ loop variable iter_name
 Example:
 
 ```
-<div data-temp="loop page.chapters i">
+template:
+
+<div data-temp="loop chapters i">
   chapter:<span data-temp="val .i.title"></span><br>
   <div data-temp="loop .i.autors k">
     autor:<span data-temp="val .k"></span><br>
   </div>
 </div>
+
+data:
+
+data = {chapters: [{title: "one", autors: ["John","Peter"]}, {title: "two", autors: ["x","y","z"]}]};
+
+result:
+
+chapter:one
+autor:John
+autor:Peter
+chapter:two
+autor:x
+autor:y
+autor:z
 ```
 
 ####1.6 Data manipulation
