@@ -28,3 +28,14 @@ ifno variable value
 Result of first is TRUE only when "variable" is equal  to "value". Result of "ifno" command is FALSE only when "variable" is not equal to "value". If result of these commands is FALSE tag is not visible. To style attribute of this tag is added "display: none;". If in style attribute "display" was used before for example "display: block;" then engine add to this tag attribute: data-disp="display: block;". "data-disp" attribute is removed when result of conditional command is TRUE and it contents is copied to style attribute. If tag is not visible without attribute "data-temp" it can not be visible even if result of conditional command is TRUE.
 
 If result is FALSE next commands in this data-temp are not interpreted!
+
+###Variable value
+
+```
+val variable
+```
+This command put current value of specified variable to innerHTML of this tag. For example:
+
+```
+<span data-temp="val page.creation.date"></span>
+```
