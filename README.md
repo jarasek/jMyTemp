@@ -4,13 +4,18 @@ jMyTemp is template engine rendering on server side and client side. Server side
 
 ##Template language
 
-This engine use only tag attributes "data-temp". Html code of page is always valid. In one "data-temp" is possible to include as many template commands as you want, but separated by semicolon. For example:
+This engine use tag attributes "data-temp". Html code of page is always valid. In one "data-temp" is possible to include as many template commands as you want, but separated by semicolon. For example:
 
 ```
 <div data-temp="if page.type main; insert /app/main.html"></div> 
 ```
 
-Command argument must be separated by single space.
+Command argument must be separated by single space. Variables in php script are array, but in java script are objects. For example page.type means:
+
+```
+php: $data = array("page" => array("type" => "main"));
+js:  data = {page: {type: "main"}};
+```
 
 ###Conditional instructions
 
@@ -20,6 +25,6 @@ Engine use two commands "if" and "ifno":
 if variable value
 ifno variable value
 ```
-Result of first is TRUE only when "variable" is equal  to "value". Result of "ifno" command is FALSE only when "variable" is not equal to "value". If result of these commands is FALSE tag is not visible. To style attribute of this tag is added "display: none;". If in style attribute "display" was used before for example "display: block;" then engine add to this tag attribute data-disp="display: block;". "data-disp" attribute is removed when result of conditional command is TRUE and it contents is copied to style attribute. If tag is not visible without attribute "data-temp" it can not be visible even if result of conditional command is TRUE.
+Result of first is TRUE only when "variable" is equal  to "value". Result of "ifno" command is FALSE only when "variable" is not equal to "value". If result of these commands is FALSE tag is not visible. To style attribute of this tag is added "display: none;". If in style attribute "display" was used before for example "display: block;" then engine add to this tag attribute: data-disp="display: block;". "data-disp" attribute is removed when result of conditional command is TRUE and it contents is copied to style attribute. If tag is not visible without attribute "data-temp" it can not be visible even if result of conditional command is TRUE.
 
 If result is FALSE next commands in this data-temp are not interpreted!
