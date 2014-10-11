@@ -80,7 +80,7 @@ Variable "page.file" can contain /app/book/chapter_1.html. Tag content can chang
 ####1.5 Loop
 
 ```
-loop variable iter_name
+loop variable item_name
 ```
 Example:
 
