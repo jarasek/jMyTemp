@@ -2,7 +2,7 @@
 
 jMyTemp is template engine rendering on server side and client side. Server side script is jMytemp.php. This script use DOM parser mydom.php. Exactly the same template can be rendered in your browser by jQuery script (file jMyTemp.js). Template format is normal HTML without special tags like for example "{{if data.field}}. This engine use HTML attributes like "data-temp". Attributes are not visible after rendering, but are not removed from code. It means that you can render page again with use different data. Such mechanism is used for AJAX technique. When you open link first time you reach page rendered by server (php script). Next click in link on your page can run java script function witch get only data. After that page can be render by browser with use new data.
 
-##Template language
+##1. Template language
 
 This engine use tag attributes "data-temp". Html code of page is always valid. In one "data-temp" is possible to include as many template commands as you want, but separated by semicolon. For example:
 
@@ -17,7 +17,7 @@ php: $data = array("page" => array("type" => "main"));
 js:  data = {page: {type: "main"}};
 ```
 
-###Conditional instructions
+###1.1 Conditional instructions
 
 Engine use two commands "if" and "ifno":
 
@@ -29,7 +29,7 @@ Result of first is TRUE only when "variable" is equal  to "value". Result of "if
 
 If result is FALSE next commands in this data-temp are not interpreted!
 
-###Tag content from variable
+###1.2 Tag content from variable
 
 ```
 val variable
@@ -39,7 +39,7 @@ This command put current value of specified variable to innerHTML of this tag. F
 ```
 <span data-temp="val page.creation.date"></span>
 ```
-###Tag attribute from variable
+###1.3 Tag attribute from variable
 
 ```
 attr variable attribute
@@ -49,9 +49,9 @@ This command put current value of specified variable to attribute of this tag. I
 ```
 <span data-temp="attr page.color style"></span>
 ```
-###Tag content from over template
+###1.4 Tag content from over template
 
-####Include template
+####1.4.1 Include template
 
 ```
 include template
@@ -65,7 +65,7 @@ If "page.type" variable is "main" template is inserted. After that variable can 
 
 Engine use absolute paths created by: $path = $_SERVER["DOCUMENT_ROOT"].$template; If your real path is /var/www/html/app/templates/main.html and document root is /var/www/html (debian linux) use /app/templates/main.html
 
-####Insert template
+####1.4.2 Insert template
 
 ```
 insert variable
@@ -77,7 +77,9 @@ Command insert content of this tag from external file. File is loaded even inner
 ```
 Variable "page.file" can contain /app/book/chapter_1.html. Tag content can change each time when user switch between chapters.
 
+####1.6 Data manipulation
 
-
-
-
+```
+data url
+```
+This command gets additional data from specified url and merge it with data used to render this template. 
