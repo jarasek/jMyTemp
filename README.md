@@ -2,6 +2,8 @@
 
 jMyTemp is template engine rendering on server side and client side. Server side script is jMytemp.php. This script use DOM parser mydom.php. Exactly the same template can be rendered in your browser by jQuery script (file jMyTemp.js). Template format is normal HTML without special tags like for example "{{if data.field}}. This engine use HTML attributes like "data-temp". Attributes are not visible after rendering, but are not removed from code. It means that you can render page again with use different data. Such mechanism is used for AJAX technique. When you open link first time you reach page rendered by server (php script). Next click in link on your page can run java script function witch get only data. After that page can be render by browser with use new data.
 
+<a href="mailto:jaroslaw.posadzy@onet.pl">Send e-mail to author</a>
+
 ##1. Template language
 
 This engine use tag attributes "data-temp". Html code of page is always valid. In one "data-temp" is possible to include as many template commands as you want, but separated by semicolon. For example:
@@ -89,24 +91,24 @@ template:
 
 <div data-temp="loop chapters i">
   chapter:<span data-temp="val .i.title"></span><br>
-  <div data-temp="loop .i.autors k">
+  <div data-temp="loop .i.authors k">
     autor:<span data-temp="val .k"></span><br>
   </div>
 </div>
 
 data:
 
-data = {chapters: [{title: "one", autors: ["John","Peter"]}, {title: "two", autors: ["x","y","z"]}]};
+data = {chapters: [{title: "one", authors: ["John","Peter"]}, {title: "two", authors: ["x","y","z"]}]};
 
 result:
 
 chapter:one
-autor:John
-autor:Peter
+author:John
+author:Peter
 chapter:two
-autor:x
-autor:y
-autor:z
+author:x
+author:y
+author:z
 ```
 This command loops by array variables. It is possible to use only simple arrays (not associative). If array is empty, content of tag is not rendered. Second parameter of command is name of temporary variable used in loop. Name of this variable can be used inside the loop, but must be preceded by dot. After rendering tag with loop command, content of this tag is moved inside created special DIV tag with style="display: none;" and  class="loop-cache". Next rendering process remove previously rendered content and regenerate it from this DIV. Cache DIV is created only for main loop.
 
