@@ -156,5 +156,17 @@ Output renderd code:
 ```
 echo $temp->getHtml();
 ```
+###2.2 Client side
 
+Include jQuery and after jMyTemp.js:
 
+```
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="jmytemp.js"></script>
+```
+On user action get new data end render page:
+```
+$.ajax({url: your_url, dataType: 'json', success: function(data) {
+	render($("#tag-id"), data);
+}});
+```
