@@ -36,16 +36,11 @@ class Template
 	}
 	
 	function getHtml() {
-		$root = $this->doc->getRootElement();
-		return $root->getInnerHtml();
+		return $this->doc->save();
 	}
 	
 	function saveData(&$data) {
-		$node = $this->doc->getRootElement();
-		$html = $node->getChild("html");
-		if(!isset($html)) {
-			return;
-		}
+		$html = $this->doc->getRootElement();
 		$head = $html->getChild("head");
 		if(!isset($head)) {
 			return;
@@ -55,7 +50,7 @@ class Template
 		$script->setAttribute("type", "text/javascript");
 			
 		$s = 'var data = {'.$this->dataToString($data).'};';
-		$script->setInnerHtml($s);
+		$script->setInnerText($s);
 	}
 	
 	//Private finctions
@@ -104,7 +99,10 @@ class Template
 		$children = $node->getChildren();
 		foreach($children as $child)	{
 			$data = $obj;
-			$this->renderChild($child, $data, $loop);	
+			$tp = $child->getType();
+			if($tp == "DOMElement") {
+				$this->renderChild($child, $data, $loop);	
+			}
 		}
 	}
 	
@@ -264,10 +262,12 @@ class Template
 	private function replaceVar($node, $name, $keys, $item) {
 		$children = $node->getChildren();
 		foreach($children as $child) {
-			$s = $child->getAttribute("data-temp");
-			$s = str_replace(" .".$name, " ".$keys.".".$item, $s);
-			$child->setAttribute("data-temp", $s);
-			$this->replaceVar($child, $name, $keys, $item);
+			if($child->getType() == "DOMElement") {
+				$s = $child->getAttribute("data-temp");
+				$s = str_replace(" .".$name, " ".$keys.".".$item, $s);
+				$child->setAttribute("data-temp", $s);
+				$this->replaceVar($child, $name, $keys, $item);
+			}
 		}
 	}
 }
