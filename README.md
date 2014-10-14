@@ -1,6 +1,6 @@
 #jMyTemp
 
-jMyTemp is template engine rendering on server side and client side. Server side script is jMytemp.php. This script use DOM parser mydom.php. Exactly the same template can be rendered in your browser by jQuery script (file jMyTemp.js). Template format is XHTML without special tags like for example "{{if data.field}}. Template must be well formed XHTML file or its fragment. You can not use tags like <br> but only <br />
+jMyTemp is template engine rendering on server side and client side. Server side script is jMytemp.php. This script use DOM parser mydom.php. Exactly the same template can be rendered in your browser by jQuery script (file jMyTemp.js). Template format is HTML 5 without special tags like for example "{{if data.field}}.
 
 This engine use HTML attributes like "data-temp". Attributes are not visible after rendering, but are not removed from code. It means that you can render page again with use different data. Such mechanism is used for AJAX technique. When you open link first time you reach page rendered by server (php script). Next click in link on your page can run java script function witch get only data. After that page can be render by browser with use new data.
 
