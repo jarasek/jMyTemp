@@ -6,6 +6,8 @@ This engine use HTML attributes like "data-temp". Attributes are not visible aft
 
 <a href="mailto:jaroslaw.posadzy@onet.pl">Send e-mail to author</a>
 
+<a href="http://localhost/app/en/book">Demo web page</a>
+
 ##1. Template language
 
 This engine use tag attributes "data-temp". Html code of page is always valid. In one "data-temp" is possible to include as many template commands as you want, but separated by semicolon. For example:
