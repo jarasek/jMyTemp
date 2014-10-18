@@ -47,7 +47,7 @@ class Element
 		}
 		else {
 			$doc = new DOMDocument();
-			$doc->loadHTML('<html><head><meta charset="UTF-8"></head><body><div>'
+			$doc->loadHTML('<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><div>'
 				.'</div></body></html>');	
 			$this->element = $doc->getElementsByTagName("div")->item(0);
 		}
@@ -72,7 +72,7 @@ class Element
 		}
 		
 		$doc = new DOMDocument();
-		$doc->loadHTML('<html><head><meta charset="UTF-8"></head><body><div>'
+		$doc->loadHTML('<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><div>'
 			.$text.'</div></body></html>');	
 		$root = $doc->getElementsByTagName("div")->item(0);
 		
@@ -252,7 +252,13 @@ class Html
 	}
 
 	function getElementById($id) {
-		return new Element($this->doc->getElementById($id));
+		$el = $this->doc->getElementById($id);
+		if(isset($el)) {
+			return new Element($el);
+		}
+		else {
+			return NULL;
+		}
 	}
 }
 
