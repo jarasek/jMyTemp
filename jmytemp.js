@@ -71,18 +71,23 @@ function render(element, obj, loop) {
 							if(typeof name == "undefined" || name == null) {
 								name = "";
 							}
-						   var temp = $(this).children(".loop-cache").first().html();
+							var temp = null;
+							$(this).contents().each(function(index, node) {
+								if (node.nodeType == 8) {
+									temp = node.nodeValue;
+									return false;
+								}
+							});							
 							var cache = "";
-							if(typeof temp === "undefined") {
+							if(typeof temp === "undefined" || temp == null) {
 								if(typeof skip == "undefined" || skip == null) {
-									cache = '<div class="loop-cache" style="display: none;">' 
-										+ $(this).html() + "</div>";
+								  cache = '<!-- ' 
+										+ $(this).html() + " -->";
 								}
 								temp = $(this).html();
 							}
 							else {
-								cache = '<div class="loop-cache" style="display: none;">' 
-										+ temp + "</div>";
+							  cache = '<!-- ' + temp + " -->";
 							}		
 							skip = true;
 							$(this).html(cache);
@@ -92,7 +97,8 @@ function render(element, obj, loop) {
 								el.find("[data-temp]").each(function(index) {
 									var attr = $(this).attr("data-temp");
 									if(name !== "") {
-										attr = attr.replace(" ." + name, " " + args[1] + "." + i);
+										attr = attr.replace(" ." + name, " " + args[1] + "." + i);								
+										attr = attr.replace(" #" + name, " #"  + i);
 									}
 									$(this).attr("data-temp", attr);
 							   });							
@@ -110,9 +116,13 @@ function render(element, obj, loop) {
 }
 
 function getData(variable, data) {
+	if(variable.substring(0, 1) == '#') {
+		return variable.substring(1);
+	}
+	
 	var keys = variable.split(".");
 	var v = data[keys.shift()];
-    	for (var i = 0, l = keys.length; i < l; i++) {
+    for (var i = 0, l = keys.length; i < l; i++) {
 		v = v[keys[i]];
 		if(typeof v == "undefined" || v == null) return "";
 	}
