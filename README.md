@@ -23,6 +23,14 @@ php: $data = array("page" => array("type" => "main"));
 js:  data = {page: {type: "main"}};
 ```
 
+Instead variable name it is possible to use immediate value preceded by "#" for example: "#10", "#test". Inside the loop variable preceded by a hash returns number of iteration: 
+
+```
+<div data-temp="loop page.table i">
+	<span data-temp="if #i 0; val #0"></span>
+</div>
+```
+
 ###1.1 Conditional instructions
 
 Engine use two commands "if" and "ifno":
@@ -114,7 +122,9 @@ author:x
 author:y
 author:z
 ```
-This command loops by array variables. It is possible to use only simple arrays (not associative). If array is empty, content of tag is not rendered. Second parameter of command is name of temporary variable used in loop. Name of this variable can be used inside the loop, but must be preceded by dot. After rendering tag with loop command, content of this tag is moved inside created special DIV tag with style="display: none;" and  class="loop-cache". Next rendering process remove previously rendered content and regenerate it from this DIV. Cache DIV is created only for main loop.
+This command loops by array variables. It is possible to use only simple arrays (not associative). If array is empty, content of tag is not rendered. Second parameter of command "item_name" is name of temporary variable used inside the loop. Name of this variable preceded by dot, for example: ".i" returns value of element from iterated array. Name of this variable preceded by "#", for example: "#i" returns number of element inside the array (iteration starts from 0).
+
+After rendering tag with loop command, content of this tag is moved inside created comment. Next rendering process remove previously rendered content and regenerate it from this comment. Caching comment is created only for main loop.
 
 ###1.6 Data manipulation
 
