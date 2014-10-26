@@ -192,7 +192,7 @@ class Template
 				if(!isset($skip)) {
 					$skip = true;
 					$temp = $node->getInnerHtml();
-					$text = '<div class="loop-cache" style="display: none;">'.$temp."</div>";
+					$text = '<!-- '.$temp." -->";
 				}
 				else {
 					$temp = $node->getInnerHtml();
@@ -246,6 +246,9 @@ class Template
 	}
 	
 	private function getData($variable, $data) {
+		if($variable[0] == "#") {
+			return substr($variable, 1);
+		}
 		$keys = explode(".", $variable);
 		$v = $data;
 		foreach($keys as $key) {
@@ -265,11 +268,13 @@ class Template
 			if($child->getType() == "DOMElement") {
 				$s = $child->getAttribute("data-temp");
 				$s = str_replace(" .".$name, " ".$keys.".".$item, $s);
+				
+				$s = str_replace(" #".$name, " #".$item, $s);
+				
 				$child->setAttribute("data-temp", $s);
 				$this->replaceVar($child, $name, $keys, $item);
 			}
 		}
 	}
 }
-
 ?>
